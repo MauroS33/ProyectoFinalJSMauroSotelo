@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/main.css">
+    <script defer src="js/registro.js"></script>
+    <title>Club Atletico Becker - Inicio</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenido al Club Atlético Becker</h1>
+        <button id="btn-ingresar">Ingresar</button>
+        <button id="btn-nuevo-registro">Quiero registrarme</button>
+        
+        <div id="registro-opciones" class="hidden">
+            <button id="btn-jugador">Jugador</button>
+            <button id="btn-colaborador">Colaborador</button>
+            <button id="btn-sponsor">Sponsor</button>
+            <button id="btn-salir">Salir</button>
+        </div>
+    </div>
+    <div id="formulario-jugador" class="formulario hidden">
+        <h2>Registro de Jugadores</h2>
+        <input type="text" id="nombre-jugador" placeholder="Nombre">
+        <input type="number" id="edad-jugador" placeholder="Edad">
+        <select id="categoria-jugador">
+            <option value="Fútbol 11 Masculino">Fútbol 11 Masculino</option>
+            <option value="Fútbol 5 Femenino">Fútbol 5 Femenino</option>
+            <option value="Fútbol 5 Masculino">Fútbol 5 Masculino</option>
+            <option value="Basketball Masculino">Basketball Masculino</option>
+
+        </select>
+        <input type="email" id="email-jugador" placeholder="Email">
+        <button id="btn-guardar-jugador">Guardar</button>
+    </div>
+    
+    <div id="formulario-colaborador" class="formulario hidden">
+        <h2>Registro de Colaboradores</h2>
+        <input type="text" id="nombre-colaborador" placeholder="Nombre">
+        <select id="vacante-colaborador">
+            <option value="DT Fútbol 11 Masculino">DT Fútbol 11 Masculino</option>
+            <option value="DT Fútbol 5 Femenino">DT Fútbol 5 Femenino</option>
+            <option value="DT Fútbol 5 Masculino">DT Fútbol 5 Masculino</option>
+            <option value="DT Basketball Masculino">DT Basketball Masculino</option>
+        </select>
+        <input type="email" id="email-colaborador" placeholder="Email">
+        <button id="btn-guardar-colaborador">Guardar</button>
+    </div>
+    
+    <div id="formulario-sponsor" class="formulario hidden">
+        <h2>Registro de Sponsor</h2>
+        <input type="text" id="marca-sponsor" placeholder="Marca">
+        <select id="zona-sponsor">
+            <option value="Remera Zona Pecho">Remera Zona Pecho</option>
+            <option value="Remera Zona Espalda">Remera Zona Espalda</option>
+            <option value="Remera Zona Mangas">Remera Zona Mangas</option>
+            <option value="Short Zona trasera">Short Zona Trasera</option>
+        </select>
+        <input type="email" id="email-sponsor" placeholder="Email">
+        <button id="btn-guardar-sponsor">Guardar</button>
+    </div>
+    <div id="login-form" class="hidden">
+        <h2>Iniciar Sesión</h2>
+        <input type="text" id="username" placeholder="Usuario">
+        <input type="password" id="password" placeholder="Contraseña">
+        <button id="btn-login">Ingresar</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

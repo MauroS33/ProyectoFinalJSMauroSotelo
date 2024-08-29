@@ -1,0 +1,4 @@
+[
+    {"nombre": "Juan Pérez", "edad": 21, "numero": 10, "categoria": "Fútbol 11 Masculino", "email": "juanperez@gmail.com", "faltas": 2},
+    {"nombre": "Ana Rodríguez", "edad": 19, "numero": 7, "categoria": "Fútbol 5 Femenino", "email": "anarodriguez@gmail.com", "faltas": 1}
+]
