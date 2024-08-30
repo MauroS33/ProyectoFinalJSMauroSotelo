@@ -1,4 +1,9 @@
 [
     {"nombre": "Carlos Gómez", "categoria": "Fútbol 11 Masculino", "email": "carlosgomez@gmail.com", "posicion": 1},
-    {"nombre": "María García", "categoria": "Basketball Masculino", "email": "mariagarcia@gmail.com", "posicion": 3}
+    {"nombre": "María García", "categoria": "Basketball Masculino", "email": "mariagarcia@gmail.com", "posicion": 3},
+    { "dorsal": 25, "nombre": "Evelyn", "apellido": "Reyes", "vinculo": "Colaborador", "categoria": "Basket", "Division": "Masculino", "partidos jugados": "9/10" },
+    { "dorsal": 12, "nombre": "Sebastian", "apellido": "Guzman", "vinculo": "Colaborador", "categoria": "Futbol 11", "Division": "Masculino", "partidos jugados": "10/10" },
+    { "dorsal": 27, "nombre": "Valentin", "apellido": "Lopez", "vinculo": "Colaborador", "categoria": "Futbol 5", "Division": "Masculino", "partidos jugados": "7/15" },
+    { "dorsal": 18, "nombre": "Luciana", "apellido": "Navarro", "vinculo": "Colaborador", "categoria": "Futbol 5", "Division": "Femenino", "partidos jugados": "10/12" }
+
 ]
