@@ -16,19 +16,21 @@ const forms = {
         email: document.getElementById('email-sponsor')
     }
 };
+
 // Manejo de la autenticación
 document.getElementById('btn-ingresar').addEventListener('click', function() {
     document.getElementById('login-form').classList.remove('hidden'); // Mostrar el formulario de login
     document.getElementById('registro-opciones').classList.add('hidden'); // Ocultar opciones de nuevo registro
-    document.querySelectorAll('.formulario').forEach(form => form.classList.add('hidden'));// Ocultar formulario de nuevo registro
+    document.querySelectorAll('.formulario').forEach(form => form.classList.add('hidden')); // Ocultar formulario de nuevo registro
 });
 
 document.getElementById('btn-login').addEventListener('click', function() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    // Verificar credenciales (agregarlo al ReadMe para el profe)
-    if (username === 'admin' && password === '1234') {
+    if (username === 'Mauro' && password === '1234') {
+        // Guardar el nombre del usuario en el Local Storage
+        localStorage.setItem('usuario', username); // Cambiar de 'usuario' a 'nombreDirectivo'
         window.location.href = '/html/directivos.html'; // Redirigir a directivos.html si las credenciales son correctas
     } else {
         Swal.fire({
@@ -38,8 +40,6 @@ document.getElementById('btn-login').addEventListener('click', function() {
         });
     }
 });
-
-
 
 // Mostrar los formularios al hacer clic en los botones correspondientes
 document.getElementById('btn-jugador').addEventListener('click', function() {
@@ -55,7 +55,6 @@ document.getElementById('btn-colaborador').addEventListener('click', function() 
 document.getElementById('btn-sponsor').addEventListener('click', function() {
     mostrarFormulario('sponsor');
     document.getElementById('login-form').classList.add('hidden');    // Ocultar ingreso de directivos
-
 });
 
 function mostrarFormulario(tipo) {
@@ -118,7 +117,6 @@ document.getElementById('btn-salir').addEventListener('click', function() {
 });
 
 
-// Guardar datos en LocalStorage
 function guardarEnLocalStorage(tipo) {
     let form = forms[tipo];
     let datos = {};
@@ -128,29 +126,27 @@ function guardarEnLocalStorage(tipo) {
     }
 
     localStorage.setItem(tipo, JSON.stringify(datos));
+
+    // Selecciona el mensaje de éxito adecuado basado en el tipo
+    let mensajeExito = '';
+    let nombre = '';
+
+    if (tipo === 'jugador') {
+        nombre = datos['nombre'];
+        let categoria = datos['categoria']; // Obtiene la categoría del jugador
+        mensajeExito = `${nombre} ha sido registrado/a correctamente como jugador/a en la categoría ${categoria}. Nos pondremos en contacto contigo para el próximo amistoso.`;
+    } else if (tipo === 'colaborador') {
+        nombre = datos['nombre'];
+        mensajeExito = `${nombre} ha sido registrado/a correctamente como colaborador/a. Gracias por unirte a nuestra familia. Bienvenido/a`;
+    } else if (tipo === 'sponsor') {
+        nombre = datos['marca'];
+        mensajeExito = `La marca ${nombre} ha sido registrada correctamente como Sponsor. Gracias por apoyar a nuestro club. Nos pondremos en contacto luego de la proxima junta directiva`;
+    }
+
+    // Mostrar el mensaje de éxito correspondiente
     Swal.fire({
         title: "Éxito",
-        text: `${tipo.charAt(0).toUpperCase() + tipo.slice(1)} registrado correctamente.`,
+        text: mensajeExito,
         icon: "success"
-    });
-}
-
-// Función de validación con retorno booleano
-function validarFormulario(tipo) {
-    let form = forms[tipo];
-    for (let campo in form) {
-        if (!form[campo].value) {
-            return false; // Retorna false si algún campo está vacío
-        }
-    }
-    return true; // Retorna true si todos los campos están llenos
-}
-
-// Función para mostrar el aviso de error
-function mostrarError(tipo) {
-    Swal.fire({
-        title: "Error",
-        text: `Por favor, complete todos los campos en el formulario de ${tipo}.`,
-        icon: "error"
     });
 }

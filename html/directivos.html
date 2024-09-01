@@ -1,27 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Churreros</title>
     <link rel="stylesheet" href="../css/main.css">
     <script defer src="../js/directivos.js"></script>
-    <title>Directivos - Club Deportivo</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Información de los Jugadores y Directores Técnicos</h1>
-        
-        <!-- Buscador -->
-        <div class="buscador">
-            <input type="text" id="buscar-nombre" placeholder="Buscar director técnico por nombre">
-            <button id="btn-buscar">Buscar</button>
-        </div>
-
-        <!-- Resultados -->
-        <div id="resultado-busqueda"></div>
-
-        <div id="info-jugadores"></div>
-        <div id="info-directores"></div>
+    <h1>Buscador de Churreros</h1>
+    <div id="buscador">
+        <input type="text" id="input-busqueda" placeholder="Buscar jugador por nombre o apellido">
+        <button id="btn-buscar">Buscar</button>
     </div>
+
+    <!-- Card genérica -->
+    <div id="users-container">
+        <div class="card">
+            <h2>Nombre: </h2>
+            <h3>Apellido: </h3>
+            <h3>Categoria: </h3>
+            <h3>División: </h3>
+            <h3>Dorsal: </h3>
+            <h3>Vinculo: </h3>
+            <h3>Asistencias: </h3>
+        </div>
+    </div>
+
+    <!-- Botón de Solicitar Indumentaria -->
+    <button id="btn-solicitar-indumentaria">Solicitar Indumentaria</button>
+
+<!-- Formulario de Solicitud de Indumentaria -->
+<div id="form-solicitud-indumentaria" class="hidden">
+    <h3>Solicitud de Indumentaria</h3>
+<!--     <label for="categoria">Categoría:</label>
+ -->    <select id="categoria">
+        <option value="Selecciona">Selecciona una categoría</option>
+        <option value="Futbol 5 Masculino">Futbol 5 M</option>
+        <option value="Futbol 5 Femenino">Futbol 5 F</option>
+        <option value="Futbol 11 Masculino">Futbol 11 M</option>
+        <option value="Basketball Masculino">Basketball</option>
+    </select>
+<!--     <label for="Talle">Talle:</label>
+ -->    <select id="Talle">
+        <option value="Selecciona">Selecciona un Talle</option>
+        <option value="S">Talle S</option>
+        <option value="M">Talle M</option>
+        <option value="L">Talle L</option>
+        <option value="XL">Talle XL</option>
+    </select>
+    <div>
+        <input type="checkbox" id="prenda-remera-juego"> Remera de Juego<br>
+        <input type="checkbox" id="prenda-remera-entrenamiento"> Remera de Entrenamiento<br>
+        <input type="checkbox" id="prenda-short"> Short<br>
+        <input type="checkbox" id="prenda-conjunto"> Conjunto Deportivo<br>
+    </div>
+    <button id="btn-agregar-carrito">Agregar al Carrito</button>
+    <button id="btn-ver-carrito">Ver Carrito</button>
+</div>
+    </div>
+    <div>
+        <p id="nombre-directivo">Actualmente logueado como: </p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

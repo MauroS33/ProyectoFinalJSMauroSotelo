@@ -1,9 +1,12 @@
+/*General*/
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
     margin: 0;
     padding: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -29,9 +32,76 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #1c4901;
 }
 
 .hidden {
     display: none;
+}
+
+/*Directivos*/
+
+.buscador {
+    display: block; 
+    margin: 20px 0; 
+}
+
+.formulario {
+    margin: 20px auto; 
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px; 
+    text-align: center; 
+}
+
+.formulario input, .formulario select, .formulario button {
+    display: block;
+    width: 100%; 
+    margin: 10px 0;
+}
+
+.card {
+    width: 100%; 
+    max-width: 500px;
+    padding: 20px;
+    border-radius: 8px;
+/*     background-image: url("../img/hero.jpg");*/
+     background-size: cover; 
+    background-position: center; 
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 10px auto;
+}
+
+.card h2, .card h3 {
+    margin: 5px 0;
+}
+
+.card p {
+    font-size: 14px;
+    color: #666;
+}
+
+#carrito-container {
+    display: flex;
+    flex-direction: column; /* Asegura que los pedidos se muestren uno debajo del otro */
+    align-items: center;
+}
+
+#carrito-container .pedido {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin: 10px;
+    width: 100%;
+    max-width: 600px; /* Limita el ancho máximo del contenedor del carrito */
+    text-align: left; /* Alinea el texto a la izquierda dentro del pedido */
 }
