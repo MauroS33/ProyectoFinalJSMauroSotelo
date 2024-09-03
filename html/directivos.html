@@ -1,68 +1,109 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscador de Churreros</title>
+<!-- Estilos -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="../css/main.css">
     <script defer src="../js/directivos.js"></script>
+    <title>Club Atletico Becker - Inicio</title>
 </head>
 <body>
-    <h1>Buscador de Churreros</h1>
-    <div id="buscador">
-        <input type="text" id="input-busqueda" placeholder="Buscar jugador por nombre o apellido">
-        <button id="btn-buscar">Buscar</button>
-    </div>
+    <header class="encabezado">
+        <img class="encabezado__logo animate__animated animate__backInRight" src="../imagenes/Logos/escudo original.png" alt="escudo">
+        <h1 class="encabezado__titulo animate__animated animate__bounce">
+            Club Atlético Becker
+        </h1>
+        <h2 class="encabezado__subtitulo">
+            09/09/2008
+        </h2>
+        <nav class="navegacion">
+            <ul class="navegacion__lista">
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="../htmls/galeriaconcarrusel.html">Galeria</a></li>
+                <li><a href="../htmls/indumentaria.html">Indumentaria</a></li>
+                <li><a href="../htmls/sponsors.html">Sponsors</a></li>
+                <li><a href="../htmls/inscribirme.html">Contactanos</a></li>            </ul>
+        </nav>
+    </header>
 
-    <!-- Card genérica -->
+    <h1>Buscador de Churreros</h1>
     <div id="users-container">
-        <div class="card">
-            <h2>Nombre: </h2>
-            <h3>Apellido: </h3>
-            <h3>Categoria: </h3>
-            <h3>División: </h3>
-            <h3>Dorsal: </h3>
-            <h3>Vinculo: </h3>
-            <h3>Asistencias: </h3>
+        <!-- Buscador dentro del contenedor -->
+        <div id="buscador">
+            <input type="text" id="input-nombre" placeholder="Buscar por nombre">
+            <input type="text" id="input-apellido" placeholder="Buscar por apellido">
+            <input type="text" id="input-categoria" placeholder="Buscar por categoría">
+            <input type="text" id="input-division" placeholder="Buscar por división">
+            <input type="text" id="input-dorsal" placeholder="Buscar por dorsal">
+            <input type="text" id="input-vinculo" placeholder="Buscar por vínculo">
+            <button id="btn-buscar">Buscar</button>
         </div>
+
+        <!-- Card genérica -->
+        <div id="resultados-busqueda"></div>
     </div>
 
     <!-- Botón de Solicitar Indumentaria -->
     <button id="btn-solicitar-indumentaria">Solicitar Indumentaria</button>
+    
 
-<!-- Formulario de Solicitud de Indumentaria -->
-<div id="form-solicitud-indumentaria" class="hidden">
-    <h3>Solicitud de Indumentaria</h3>
-<!--     <label for="categoria">Categoría:</label>
- -->    <select id="categoria">
-        <option value="Selecciona">Selecciona una categoría</option>
-        <option value="Futbol 5 Masculino">Futbol 5 M</option>
-        <option value="Futbol 5 Femenino">Futbol 5 F</option>
-        <option value="Futbol 11 Masculino">Futbol 11 M</option>
-        <option value="Basketball Masculino">Basketball</option>
-    </select>
-<!--     <label for="Talle">Talle:</label>
- -->    <select id="Talle">
-        <option value="Selecciona">Selecciona un Talle</option>
-        <option value="S">Talle S</option>
-        <option value="M">Talle M</option>
-        <option value="L">Talle L</option>
-        <option value="XL">Talle XL</option>
-    </select>
-    <div>
-        <input type="checkbox" id="prenda-remera-juego"> Remera de Juego<br>
-        <input type="checkbox" id="prenda-remera-entrenamiento"> Remera de Entrenamiento<br>
-        <input type="checkbox" id="prenda-short"> Short<br>
-        <input type="checkbox" id="prenda-conjunto"> Conjunto Deportivo<br>
+    <!-- Formulario de Solicitud de Indumentaria -->
+    <div id="form-solicitud-indumentaria" class="hidden">
+        <h3>Solicitud de Indumentaria</h3>
+        <select id="categoria">
+            <option value="Selecciona">Selecciona una categoría</option>
+            <option value="Futbol 5 Masculino">Futbol 5 M</option>
+            <option value="Futbol 5 Femenino">Futbol 5 F</option>
+            <option value="Futbol 11 Masculino">Futbol 11 M</option>
+            <option value="Basketball Masculino">Basketball</option>
+        </select>
+        <select id="Talle">
+            <option value="Selecciona">Selecciona un Talle</option>
+            <option value="S">Talle S</option>
+            <option value="M">Talle M</option>
+            <option value="L">Talle L</option>
+            <option value="XL">Talle XL</option>
+        </select>
+        <div>
+            <input type="checkbox" id="prenda-remera-juego"> Remera de Juego<br>
+            <input type="checkbox" id="prenda-remera-entrenamiento"> Remera de Entrenamiento<br>
+            <input type="checkbox" id="prenda-short"> Short<br>
+            <input type="checkbox" id="prenda-conjunto"> Conjunto Deportivo<br>
+        </div>
+        <button id="btn-agregar-carrito">Agregar al Carrito</button>
+        <button id="btn-ver-carrito">Ver Carrito</button>
     </div>
-    <button id="btn-agregar-carrito">Agregar al Carrito</button>
-    <button id="btn-ver-carrito">Ver Carrito</button>
-</div>
-    </div>
+
     <div>
         <p id="nombre-directivo">Actualmente logueado como: </p>
     </div>
+    <footer class="pie">
+        <div class="pie__redes">
+            <a href="https://www.facebook.com/profile.php?id=100006706397954">
+                <img src="../imagenes/Logos/facebook pasto.png" alt="Facebook">
+            </a>
+            <a href="https://www.instagram.com/clubatleticobecker/">
+                <img src="../imagenes/Logos/instagram pasto.png" alt="Instagram">
+            <a href="https://x.com/?lang=es">
+                <img src="../imagenes/Logos/twitter pasto prox.png" alt="Twitter">
+            </a>
+            <a href="https://www.youtube.com/">
+                <img src="../imagenes/Logos/youtube pasto prox.png" alt="YouTube">
+            </a>
+        </div>
+        <p class="pie__texto">
+            CopyRight by Mauro33
+        </p>
+        <div class="pie__logos">
+            <img src="../imagenes/Logos/escudo original.png" alt="Escudo">
+            <img src="../imagenes/Logos/Logo redondo.png" alt="Logo-redondo">
+            <img src="../imagenes/Logos/Bskt logo.png" alt="logobasket">
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

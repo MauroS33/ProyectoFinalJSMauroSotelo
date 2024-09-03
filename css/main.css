@@ -1,15 +1,77 @@
-/*General*/
 
+/*Header*/
+
+.encabezado, .pie {
+    width: 100%; /* Ocupa todo el ancho */
+    display: flex; /* Mantiene la flexibilidad de los elementos hijos */
+    flex-wrap: wrap; /* Permite que el contenido se ajuste y envuelva si es necesario */
+    align-items: center; /* Centra verticalmente los elementos hijos */
+    justify-content: space-between; /* Distribuye el contenido horizontalmente */
+    padding: 10px 20px; /* Añade un poco de espacio interior */
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+.encabezado {
+    display: flex;
+    align-items: center;
+    background-image: url("../imagenes/fondos/rastafriki.jpg");
+    background-repeat: initial;
+  }
+  .encabezado__logo {
+    width: 200px;
+  }
+  .encabezado__titulo {
+    color: #ffffff;
+    flex-grow: 1;
+    text-align: center;
+  }
+  .encabezado__subtitulo {
+    color: #ffffff;
+  }
+  
+  /* Estilo para la navegación */
+  .navegacion__lista {
+    margin-top: auto; /* Mueve la navegación hacia abajo */
+  }
+  .navegacion__lista li {
+    display: block; /* Cambiamos a bloque para que cada elemento esté en una línea */
+    margin-bottom: 10px; /* Añadimos un poco de espacio entre los elementos */
+  }
+  .navegacion__lista a {
+    color: #ffffff;
+    padding: 10px;
+    text-decoration: none; /* Quitamos el subrayado del enlace */
+  }
+  .navegacion__lista a:hover {
+    color: #ff0000; /* Cambia el color al pasar el cursor sobre el enlace */
+  }
+  
+/*General*/
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    margin: 0;
-    padding: 0;
+    background: #1E9600; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FF0000, #FFF200, #1E9600); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FF0000, #FFF200, #1E9600); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+  
+
+.principal {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
+  }
+  .principal__foto {
+    max-width: 100%;
+  }
+  .principal__texto {
+    text-align: justify;
+    max-width: 80%;
+    font-size: x-large;
+  }
+  
+
+.login-form {
+    display: flex;
+    justify-content: center;
 }
 
 .container {
@@ -90,18 +152,72 @@ button:hover {
 }
 
 #carrito-container {
-    display: flex;
-    flex-direction: column; /* Asegura que los pedidos se muestren uno debajo del otro */
-    align-items: center;
+    display: flex; /* Establece el uso de flexbox */
+    flex-direction: row; /* Muestra los elementos en una columna */
+    align-items: flex-start; /* Alinea los elementos al principio */
+    max-height: 70vh; /* Establece una altura máxima para el contenedor */
+/*     max-width: 800px;
+ */    overflow-y: auto; /* Permite el desplazamiento vertical si el contenido excede la altura */
+    padding: 10px; /* Añade un poco de relleno alrededor de los elementos */
+    border: 1px solid #ddd; /* Borde alrededor del contenedor */
+    margin-top: 20px; /* Espacio arriba del contenedor */
 }
 
-#carrito-container .pedido {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    margin: 10px;
-    width: 100%;
-    max-width: 600px; /* Limita el ancho máximo del contenedor del carrito */
-    text-align: left; /* Alinea el texto a la izquierda dentro del pedido */
+.pedido {
+    width: 100%; /* Asegura que cada pedido ocupe todo el ancho del contenedor */
+    background-color: #f9f9f9; /* Fondo para los elementos del carrito */
+    margin-bottom: 10px; /* Espacio entre cada pedido */
+    padding: 10px; /* Espacio interior de cada pedido */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para cada pedido */
 }
+
+/*footer*/
+
+
+
+.pie {
+    display: flex;
+    flex-direction: column;
+    background-image: url("../imagenes/fondos/rastafriki.jpg");
+    background-repeat:repeat;
+  }
+
+  .pie__texto {
+    text-align: center;
+    background-color: #2ed32e;
+    width: 100%;
+  }
+  .pie a {
+    display: inline-block;
+    text-align: center;
+    margin: auto;
+  }
+  .pie a img {
+    text-align: center;
+    padding: none;
+    margin: none;
+    width: 100px;
+    height: auto;
+  }
+  .pie__redes {
+    background-image: url(../imagenes/fondos/pasto.jpg);
+    display: flex;
+    align-content: space-around;
+    width: 100%;
+  }
+  .pie__redes a img {
+    width: 100px;
+  }
+  .pie__logos {
+    display: flex; /*deberia derle el display al padre de todos o lo dejo en estas 2 secciones*/
+    align-content: space-around;
+    width: 100%;
+  }
+  .pie__logos img {
+    display: inline-block;
+    justify-content: space-between;
+    margin: auto;
+    max-height: 200px;
+  }
+  
