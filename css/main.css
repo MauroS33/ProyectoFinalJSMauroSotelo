@@ -76,8 +76,9 @@ body {
 
 .container {
     text-align: center;
-    padding: 20px;
-    background-color: white;
+    padding: 25px;
+    margin: 33px;
+    border: 1px solid #1c4901;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
@@ -153,24 +154,32 @@ button:hover {
 
 #carrito-container {
     display: flex; /* Establece el uso de flexbox */
-    flex-direction: row; /* Muestra los elementos en una columna */
-    align-items: flex-start; /* Alinea los elementos al principio */
+    flex-direction: row; 
     max-height: 70vh; /* Establece una altura máxima para el contenedor */
-/*     max-width: 800px;
- */    overflow-y: auto; /* Permite el desplazamiento vertical si el contenido excede la altura */
+/*  max-width: 800px; */    
+    overflow-y: auto; /* Permite el desplazamiento vertical si el contenido excede la altura */
     padding: 10px; /* Añade un poco de relleno alrededor de los elementos */
     border: 1px solid #ddd; /* Borde alrededor del contenedor */
     margin-top: 20px; /* Espacio arriba del contenedor */
 }
 
 .pedido {
-    width: 100%; /* Asegura que cada pedido ocupe todo el ancho del contenedor */
+
+    max-width: 500px;
     background-color: #f9f9f9; /* Fondo para los elementos del carrito */
     margin-bottom: 10px; /* Espacio entre cada pedido */
     padding: 10px; /* Espacio interior de cada pedido */
     border-radius: 5px; /* Bordes redondeados */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para cada pedido */
 }
+
+.boton-deshabilitado {
+    background-color: #d3d3d3; /* Color de fondo para indicar deshabilitación */
+    color: #888; /* Color de texto para indicar deshabilitación */
+    cursor: not-allowed; /* Cambia el cursor para indicar que no se puede hacer clic */
+    opacity: 0.5; /* Reduce la opacidad para un efecto visual */
+}
+
 
 /*footer*/
 

@@ -1,7 +1,54 @@
 // Recuperar datos del carrito y del usuario
 const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 const nombreDirectivo = localStorage.getItem('nombreDirectivo') || 'Desconocido';
-const carritoContainer = document.getElementById('carrito-container');
+const carritoContainer = document.getElementById('carrito-total');
+const confirmarPedidoButton = document.getElementById('confirmarPedidoButton');
+const vaciarCarritoButton = document.getElementById('btn-vaciar-carrito');
+
+// Función para actualizar el estado del botón de Confirmar y de Vaciar Pedido
+const actualizarEstadoBoton = () => {
+    if (carrito.length === 0) {
+        confirmarPedidoButton.disabled = true; // Deshabilita el botón si el carrito está vacío
+        confirmarPedidoButton.classList.add('boton-deshabilitado'); // Añadir clase para estilo deshabilitado
+        vaciarCarritoButton.disabled = true; // Deshabilita el botón si el carrito está vacío
+        vaciarCarritoButton.classList.add('boton-deshabilitado'); // Añadir clase para estilo deshabilitado
+    } else {
+        confirmarPedidoButton.disabled = false; // Habilita el botón si hay elementos en el carrito
+        confirmarPedidoButton.classList.remove('boton-deshabilitado'); // Quitar clase de estilo deshabilitado
+        vaciarCarritoButton.disabled = false; // Habilita el botón si hay elementos en el carrito
+        vaciarCarritoButton.classList.remove('boton-deshabilitado'); // Quitar clase de estilo deshabilitado
+
+    }
+};
+
+
+// Llamar a la función para actualizar el estado al cargar la página
+actualizarEstadoBoton();
+
+// Confirmar pedido y guardar en un nuevo array
+confirmarPedidoButton.addEventListener('click', () => {
+    const pedidosConfirmados = JSON.parse(localStorage.getItem('pedidosConfirmados')) || [];
+    pedidosConfirmados.push(...carrito);
+    localStorage.setItem('pedidosConfirmados', JSON.stringify(pedidosConfirmados));
+    Swal.fire({
+        title: 'Pedido Confirmado',
+        text: 'Tu pedido ha sido confirmado.',
+        icon: 'success',
+        showConfirmButton: true
+    }).then(() => {
+        localStorage.removeItem('carrito'); // Limpiar el carrito después de confirmar
+        window.location.reload(); // Recargar la página
+    });
+});
+
+
+// Vaciar el carrito y deshabilitar el botón de Confirmar Pedido
+vaciarCarritoButton.addEventListener('click', () => {
+    localStorage.removeItem('carrito'); // Limpiar el carrito del Local Storage
+    carrito.length = 0; // Vaciar el array del carrito
+    actualizarEstadoBoton(); // Actualizar el estado del botón
+    // Aquí puedes agregar código para actualizar la visualización del carrito en la página
+});
 
 // Mostrar los elementos del carrito
 if (carrito.length === 0) {
@@ -48,15 +95,14 @@ if (carrito.length === 0) {
     });
 }
 
-
 // Función para editar un pedido
 function editarPedido(index) {
     const pedido = carrito[index];
     const precioPorPrenda = {
-        'Remera de Juego': 25,
-        'Remera de Entrenamiento': 20,
-        'Short': 15,
-        'Conjunto Deportivo': 40
+        'Remera de Juego': 2500,
+        'Remera de Entrenamiento': 1800,
+        'Short': 750,
+        'Conjunto Deportivo': 3000
     };
 
     Swal.fire({
@@ -75,10 +121,10 @@ function editarPedido(index) {
                 <option value="XL" ${pedido.talle === 'XL' ? 'selected' : ''}>XL</option>
             </select>
             <div>
-                <label><input type="checkbox" class="swal2-checkbox" value="Remera de Juego" ${pedido.prendas.some(p => p.prenda === 'Remera de Juego') ? 'checked' : ''}> Remera de Juego - $25</label><br>
-                <label><input type="checkbox" class="swal2-checkbox" value="Remera de Entrenamiento" ${pedido.prendas.some(p => p.prenda === 'Remera de Entrenamiento') ? 'checked' : ''}> Remera de Entrenamiento - $20</label><br>
-                <label><input type="checkbox" class="swal2-checkbox" value="Short" ${pedido.prendas.some(p => p.prenda === 'Short') ? 'checked' : ''}> Short - $15</label><br>
-                <label><input type="checkbox" class="swal2-checkbox" value="Conjunto Deportivo" ${pedido.prendas.some(p => p.prenda === 'Conjunto Deportivo') ? 'checked' : ''}> Conjunto Deportivo - $40</label>
+                <label><input type="checkbox" class="swal2-checkbox" value="Remera de Juego" ${pedido.prendas.some(p => p.prenda === 'Remera de Juego') ? 'checked' : ''}> Remera de Juego - $2500</label><br>
+                <label><input type="checkbox" class="swal2-checkbox" value="Remera de Entrenamiento" ${pedido.prendas.some(p => p.prenda === 'Remera de Entrenamiento') ? 'checked' : ''}> Remera de Entrenamiento - $1800</label><br>
+                <label><input type="checkbox" class="swal2-checkbox" value="Short" ${pedido.prendas.some(p => p.prenda === 'Short') ? 'checked' : ''}> Short - $750</label><br>
+                <label><input type="checkbox" class="swal2-checkbox" value="Conjunto Deportivo" ${pedido.prendas.some(p => p.prenda === 'Conjunto Deportivo') ? 'checked' : ''}> Conjunto Deportivo - $3000</label>
             </div>
         `,
         confirmButtonText: 'Guardar',
@@ -94,7 +140,6 @@ function editarPedido(index) {
                     precio: precioPorPrenda[checkbox.value]
                 }));
 
-            // Calcular el precio total en función de las prendas seleccionadas
             const precioTotal = prendasSeleccionadas.reduce((total, item) => total + item.precio, 0);
 
             carrito[index] = { categoria, talle, prendas: prendasSeleccionadas, precio: precioTotal };
@@ -104,7 +149,6 @@ function editarPedido(index) {
     });
 }
 
-
 // Función para eliminar un pedido
 function eliminarPedido(index) {
     carrito.splice(index, 1);
@@ -113,7 +157,7 @@ function eliminarPedido(index) {
 }
 
 // Vaciar el carrito completamente
-document.getElementById('btn-vaciar-carrito').addEventListener('click', () => {
+vaciarCarritoButton.addEventListener('click', () => {
     Swal.fire({
         title: '¿Estás seguro?',
         text: "No podrás revertir esta acción.",
@@ -130,25 +174,6 @@ document.getElementById('btn-vaciar-carrito').addEventListener('click', () => {
 });
 
 // Botón de Volver
-document.getElementById('btn-volver').addEventListener('click', function() {
-    window.location.href = '/html/directivos.html'; // Cambia la ruta a la página de destino
+document.getElementById('btn-volver').addEventListener('click', () => {
+    window.history.back(); // Regresa a la página anterior
 });
-
-
-// Confirmar pedido y guardar en un nuevo array
-confirmarPedidoButton.addEventListener('click', () => {
-    const pedidosConfirmados = JSON.parse(localStorage.getItem('pedidosConfirmados')) || [];
-    pedidosConfirmados.push(...carrito);
-    localStorage.setItem('pedidosConfirmados', JSON.stringify(pedidosConfirmados));
-    Swal.fire('Pedido Confirmado', 'Tu pedido ha sido confirmado.', 'success').then(() => {
-        localStorage.removeItem('carrito'); // Limpiar el carrito después de confirmar
-        window.location.reload(); // Recargar la página
-    });
-});
-
-// Mostrar el nombre del directivo logueado en la página
-if (nombreDirectivo) {
-    document.getElementById('nombre-directivo').textContent = `Actualmente logueado como: ${nombreDirectivo}`;
-} else {
-    document.getElementById('nombre-directivo').textContent = 'No se encontró el nombre del directivo';
-}

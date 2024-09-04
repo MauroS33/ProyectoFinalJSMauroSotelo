@@ -17,6 +17,7 @@ const forms = {
     }
 };
 
+
 // Manejo de la autenticación
 document.getElementById('btn-ingresar').addEventListener('click', function() {
     document.getElementById('login-form').classList.remove('hidden'); // Mostrar el formulario de login
@@ -116,37 +117,66 @@ document.getElementById('btn-salir').addEventListener('click', function() {
     document.querySelectorAll('.formulario').forEach(form => form.classList.add('hidden')); // Ocultar todos los formularios
 });
 
-
 function guardarEnLocalStorage(tipo) {
     let form = forms[tipo];
-    let datos = {};
+    let registro = {};
 
     for (let campo in form) {
-        datos[campo] = form[campo].value;
+        registro[campo] = form[campo].value;
     }
 
-    localStorage.setItem(tipo, JSON.stringify(datos));
+    // Obtener registros del Local Storage
+    let registrosJSON = localStorage.getItem(tipo);
+    let registros = [];
 
-    // Selecciona el mensaje de éxito adecuado basado en el tipo
-    let mensajeExito = '';
-    let nombre = '';
-
-    if (tipo === 'jugador') {
-        nombre = datos['nombre'];
-        let categoria = datos['categoria']; // Obtiene la categoría del jugador
-        mensajeExito = `${nombre} ha sido registrado/a correctamente como jugador/a en la categoría ${categoria}. Nos pondremos en contacto contigo para el próximo amistoso.`;
-    } else if (tipo === 'colaborador') {
-        nombre = datos['nombre'];
-        mensajeExito = `${nombre} ha sido registrado/a correctamente como colaborador/a. Gracias por unirte a nuestra familia. Bienvenido/a`;
-    } else if (tipo === 'sponsor') {
-        nombre = datos['marca'];
-        mensajeExito = `La marca ${nombre} ha sido registrada correctamente como Sponsor. Gracias por apoyar a nuestro club. Nos pondremos en contacto luego de la proxima junta directiva`;
+    if (registrosJSON) {
+        registros = JSON.parse(registrosJSON);
+        console.log('Registros cargados:', registros);  // Verificar qué hay en registros
     }
 
-    // Mostrar el mensaje de éxito correspondiente
+    // Verificar el tipo de datos
+    if (!Array.isArray(registros)) {
+        console.error('Error: registros no es un array.');
+        registros = [];
+    }
+
+    registros.push(registro);
+    localStorage.setItem(tipo, JSON.stringify(registros));
+
     Swal.fire({
         title: "Éxito",
-        text: mensajeExito,
+        text: `${registro.nombre || registro.marca} ha sido registrado/a correctamente.`,
         icon: "success"
     });
+
+    // Limpiar el formulario después de guardar
+    for (let campo in form) {
+        form[campo].value = '';
+    }
+}
+function guardarEnLocalStorage(tipo) {
+    let form = forms[tipo];
+    let registro = {};
+
+    for (let campo in form) {
+        registro[campo] = form[campo].value;
+    }
+
+    // Obtener los registros existentes del Local Storage
+    let registros = JSON.parse(localStorage.getItem(tipo)) || [];
+
+    // Agregar el nuevo registro al array
+    registros.push(registro);
+
+    // Guardar el array actualizado en el Local Storage
+    localStorage.setItem(tipo, JSON.stringify(registros));
+
+    Swal.fire({
+        title: "Éxito",
+        text: "Registro guardado correctamente.",
+        icon: "success"
+    });
+
+    // Limpiar el formulario después de guardar
+    limpiarFormulario(tipo);
 }

@@ -1,3 +1,19 @@
+// Función para actualizar el estado del botón de Confirmar y de Vaciar Pedido
+const actualizarEstadoBoton = () => {
+    if (carrito.length === 0) {
+        confirmarPedidoButton.disabled = true; // Deshabilita el botón si el carrito está vacío
+        vaciarCarritoButton.disabled = true; // Deshabilita el botón si el carrito está vacío
+        confirmarPedidoButton.classList.add('boton-deshabilitado'); // Añadir clase para estilo deshabilitado
+        vaciarCarritoButton.classList.add('boton-deshabilitado'); // Añadir clase para estilo deshabilitado
+
+    } else {
+        confirmarPedidoButton.disabled = false; // Habilita el botón si hay elementos en el carrito
+        vaciarCarritoButton.disabled = false; // Habilita el botón si hay elementos en el carrito
+        confirmarPedidoButton.classList.remove('boton-deshabilitado'); // Quitar clase de estilo deshabilitado
+        vaciarCarritoButton.classList.remove('boton-deshabilitado'); // Añadir clase para estilo deshabilitado
+
+    }
+};
 // Cargar los datos desde el archivo JSON
 async function cargarDatos() {
     try {
@@ -9,6 +25,8 @@ async function cargarDatos() {
         return [];
     }
 }
+
+
 
 // Función de búsqueda mejorada
 async function buscarJugador() {
@@ -95,10 +113,10 @@ document.getElementById('btn-agregar-carrito').addEventListener('click', agregar
 
 // Precios de las prendas
 const preciosPrendas = {
-    'Remera de Juego': 20,
-    'Remera de Entrenamiento': 15,
-    'Short': 10,
-    'Conjunto Deportivo': 30
+    'Remera de Juego': 2500,
+    'Remera de Entrenamiento': 1800,
+    'Short': 750,
+    'Conjunto Deportivo': 3000
 };
 
 function agregarAlCarrito() {
@@ -152,3 +170,74 @@ document.getElementById('btn-ver-carrito').addEventListener('click', function() 
     window.location.href = '/html/carrito.html'; // Redirige al nuevo HTML para mostrar el carrito
 });
 
+// nueva funcion de buscar nuevos registros
+// Función para mostrar registros de una categoría
+function mostrarRegistros(categoria) {
+    const registrosContainer = document.getElementById('registros-container');
+    registrosContainer.innerHTML = ''; // Limpiar el contenedor antes de mostrar nuevos registros
+
+    // Obtener datos de Local Storage
+    const registros = JSON.parse(localStorage.getItem(categoria)) || [];
+
+    if (registros.length === 0) {
+        registrosContainer.innerHTML = `<p>No hay registros para ${categoria}.</p>`;
+        return;
+    }
+
+    // Crear una lista para mostrar los registros
+    const lista = document.createElement('ul');
+    registros.forEach(registro => {
+        const item = document.createElement('li');
+        item.textContent = JSON.stringify(registro); // Puedes formatear los registros como desees
+        lista.appendChild(item);
+    });
+    registrosContainer.appendChild(lista);
+}
+
+// Botones de eventos para mostrar registros
+document.getElementById('btn-mostrar-jugadores').addEventListener('click', function() {
+    mostrarRegistros('jugador'); // Cambiar a 'jugador' para coincidir con la clave usada en Local Storage
+});
+
+document.getElementById('btn-mostrar-colaboradores').addEventListener('click', function() {
+    mostrarRegistros('colaborador'); // Cambiar a 'colaborador'
+});
+
+document.getElementById('btn-mostrar-sponsors').addEventListener('click', function() {
+    mostrarRegistros('sponsor'); // Cambiar a 'sponsor'
+});
+
+// Funciones para cargar los datos desde Local Storage y mostrarlos
+function cargarYMostrarRegistros(tipo) {
+    const contenedor = document.getElementById("contenedor-registros");
+    contenedor.innerHTML = ""; // Limpiar el contenido anterior
+
+    // Obtener los registros del Local Storage
+    const registros = JSON.parse(localStorage.getItem(tipo)) || [];
+
+    // Crear elementos HTML para cada registro
+    registros.forEach(registro => {
+        const registroElemento = document.createElement("div");
+        registroElemento.className = "registro";
+        registroElemento.innerHTML = `
+            <p>Nombre: ${registro.nombre}</p>
+            <p>Categoría: ${registro.categoria}</p>
+            <p>Email: ${registro.email}</p>
+            <!-- Agrega más campos según sea necesario -->
+        `;
+        contenedor.appendChild(registroElemento);
+    });
+}
+
+// Event listeners para los botones
+document.getElementById("mostrar-jugadores").addEventListener("click", () => {
+    cargarYMostrarRegistros("jugadores");
+});
+
+document.getElementById("mostrar-colaboradores").addEventListener("click", () => {
+    cargarYMostrarRegistros("colaboradores");
+});
+
+document.getElementById("mostrar-sponsors").addEventListener("click", () => {
+    cargarYMostrarRegistros("sponsors");
+});
