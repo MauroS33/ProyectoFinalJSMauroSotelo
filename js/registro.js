@@ -74,24 +74,42 @@ document.getElementById('btn-guardar-jugador').addEventListener('click', functio
     if (validarFormulario('jugador')) {
         guardarEnLocalStorage('jugador');
     } else {
-        mostrarError('jugador');
-    }
+        function mostrarError(tipo) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: `Por favor completa correctamente los campos de ${tipo}.`,
+                showConfirmButton: true
+            });
+        }    }
 });
 
 document.getElementById('btn-guardar-colaborador').addEventListener('click', function() {
     if (validarFormulario('colaborador')) {
         guardarEnLocalStorage('colaborador');
     } else {
-        mostrarError('colaborador');
-    }
+        function mostrarError(tipo) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: `Por favor completa correctamente los campos de ${tipo}.`,
+                showConfirmButton: true
+            });
+        }    }
 });
 
 document.getElementById('btn-guardar-sponsor').addEventListener('click', function() {
     if (validarFormulario('sponsor')) {
         guardarEnLocalStorage('sponsor');
     } else {
-        mostrarError('sponsor');
-    }
+        function mostrarError(tipo) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: `Por favor completa correctamente los campos de ${tipo}.`,
+                showConfirmButton: true
+            });
+        }    }
 });
 
 // Función de validación
@@ -130,15 +148,14 @@ function guardarEnLocalStorage(tipo) {
 
     if (registrosJSON) {
         registros = JSON.parse(registrosJSON);
-        console.log('Registros cargados:', registros);  // Verificar qué haya registros
-    }
+     }
 
     registros.push(registro);
     localStorage.setItem(tipo, JSON.stringify(registros));
 
     Swal.fire({
         title: "Éxito",
-        text: `${registro.nombre || registro.marca} ha sido registrado/a correctamente.`,
+        text: `${registro.nombre || registro.marca} ha sido registrado/a correctamente. Nos pondremos en contacto a la brevedad.`,
         icon: "success"
     });
 

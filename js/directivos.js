@@ -21,7 +21,12 @@ async function cargarDatos() {
         const jugadores = await respuesta.json();
         return jugadores;
     } catch (error) {
-        console.error('Error al cargar los datos:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error al cargar los datos',
+            text: 'Hubo un problema al intentar cargar los datos de los jugadores. Por favor, inténtalo nuevamente.',
+            confirmButtonText: 'Aceptar'
+        });
         return [];
     }
 }
@@ -121,7 +126,7 @@ const preciosPrendas = {
 
 function agregarAlCarrito() {
     let categoria = document.getElementById('categoria').value;
-    let talle = document.getElementById('Talle').value; // Obtener el talle seleccionado
+    let talle = document.getElementById('Talle').value; 
     let prendasSeleccionadas = [];
 
     // Recolectar las prendas seleccionadas con sus precios
@@ -195,15 +200,15 @@ function mostrarRegistros(categoria) {
 }
 
 // Botones de eventos para mostrar registros
-document.getElementById('mostrar-jugadores').addEventListener('click', function() {
+document.getElementById('mostrar-jugador').addEventListener('click', function() {
     mostrarRegistros('jugador'); 
 });
 
-document.getElementById('mostrar-colaboradores').addEventListener('click', function() {
+document.getElementById('mostrar-colaborador').addEventListener('click', function() {
     mostrarRegistros('colaborador'); 
 });
 
-document.getElementById('mostrar-sponsors').addEventListener('click', function() {
+document.getElementById('mostrar-sponsor').addEventListener('click', function() {
     mostrarRegistros('sponsor'); 
 });
 
@@ -229,14 +234,36 @@ function cargarYMostrarRegistros(tipo) {
 }
 
 // Event listeners para los botones
-document.getElementById("mostrar-jugadores").addEventListener("click", () => {
-    cargarYMostrarRegistros("jugadores");
+document.getElementById("mostrar-jugador").addEventListener("click", () => {
+    cargarYMostrarRegistros("jugador");
 });
 
-document.getElementById("mostrar-colaboradores").addEventListener("click", () => {
+document.getElementById("mostrar-colaborador").addEventListener("click", () => {
     cargarYMostrarRegistros("colaborador");
 });
 
-document.getElementById("mostrar-sponsors").addEventListener("click", () => {
+document.getElementById("mostrar-sponsor").addEventListener("click", () => {
     cargarYMostrarRegistros("sponsor");
 });
+
+// Función para borrar registros del Local Storage con confirmación
+function borrarRegistros(tipo) {
+    Swal.fire({
+        title: `¿Estás seguro de borrar todos los ${tipo}?`,
+        text: "No podrás revertir esta acción.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, borrar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            localStorage.removeItem(tipo); // Elimina el registro del tipo especificado del Local Storage
+            Swal.fire(`${tipo.charAt(0).toUpperCase() + tipo.slice(1)} borrados`, `Todos los ${tipo} han sido eliminados.`, 'success').then(() => window.location.reload());
+        }
+    });
+}
+
+// Eventos para los botones de borrar
+document.getElementById('btn-borrar-jugador').addEventListener('click', () => borrarRegistros('jugador'));
+document.getElementById('btn-borrar-colaborador').addEventListener('click', () => borrarRegistros('colaborador'));
+document.getElementById('btn-borrar-sponsor').addEventListener('click', () => borrarRegistros('sponsor'));
