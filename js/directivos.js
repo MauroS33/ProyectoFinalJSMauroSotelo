@@ -182,7 +182,7 @@ function agregarAlCarrito() {
 
 // Redireccionar al carrito
 document.getElementById('btn-ver-carrito').addEventListener('click', function() {
-    window.location.href = 'html/carrito.html'; // Redirige al HTML para "carrito"
+    window.location.href = 'carrito.html'; // Redirige al HTML para "carrito"
 });
 
 // Funcion de buscar nuevos registros
