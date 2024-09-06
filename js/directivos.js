@@ -102,7 +102,6 @@ function mostrarFormularioIndumentaria() {
     // Reiniciar los campos del formulario si el formulario se está mostrando
     if (!document.getElementById('form-solicitud-indumentaria').classList.contains('hidden')) {
         // Reiniciar campos del formulario
-        document.getElementById('categoria').value = 'Selecciona'; // Asumiendo que 'Selecciona' es el valor inicial del dropdown
         document.getElementById('Talle').value = 'Selecciona'; // Asumiendo que 'Selecciona' es el valor inicial del dropdown
 
         // Desmarcar todas las prendas seleccionadas
@@ -110,8 +109,20 @@ function mostrarFormularioIndumentaria() {
         document.getElementById('prenda-remera-entrenamiento').checked = false;
         document.getElementById('prenda-short').checked = false;
         document.getElementById('prenda-conjunto').checked = false;
-    }
+        
+        // Reiniciar el valor de cantidad de prendas a 1
+        document.getElementById('cantidad-prendas').value = 1;    }
 }
+
+const inputCantidad = document.getElementById('cantidad-prendas');
+
+// Otra forma de hacer que no se pueda pedir menos de 1 prenda (para la proxima temporada)
+/* inputCantidad.addEventListener('input', () => {
+    if (inputCantidad.value < 1) {
+        inputCantidad.value = 1; // Establece el valor en 1 si es menor
+        Swal.fire('Valor inválido', 'La cantidad no puede ser cero.', 'error');
+    }
+}); */
 
 // Agregar prendas al carrito y almacenarlas en Local Storage
 document.getElementById('btn-agregar-carrito').addEventListener('click', agregarAlCarrito);
@@ -125,7 +136,6 @@ const preciosPrendas = {
 };
 
 function agregarAlCarrito() {
-    let categoria = document.getElementById('categoria').value;
     let talle = document.getElementById('Talle').value; 
     let prendasSeleccionadas = [];
 
@@ -136,10 +146,10 @@ function agregarAlCarrito() {
     if (document.getElementById('prenda-conjunto').checked) prendasSeleccionadas.push({ prenda: 'Conjunto Deportivo', precio: preciosPrendas['Conjunto Deportivo'] });
 
     // Validar que se haya seleccionado una categoría y un talle
-    if (categoria === 'Selecciona' || talle === 'Selecciona') {
+    if ( talle === 'Selecciona') {
         Swal.fire({
             title: "Error",
-            text: "Por favor, selecciona una categoría y un talle.",
+            text: "Por favor, selecciona un talle.",
             icon: "error"
         });
         return;
@@ -156,7 +166,7 @@ function agregarAlCarrito() {
 
     // Crear el carrito de compras
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    let nuevaSolicitud = { categoria, talle, prendas: prendasSeleccionadas, directivo: nombreDirectivo };
+    let nuevaSolicitud = { talle, prendas: prendasSeleccionadas, directivo: nombreDirectivo };
 
     carrito.push(nuevaSolicitud);
     localStorage.setItem('carrito', JSON.stringify(carrito));
@@ -175,7 +185,7 @@ document.getElementById('btn-ver-carrito').addEventListener('click', function() 
     window.location.href = '/html/carrito.html'; // Redirige al HTML para "carrito"
 });
 
-// nueva funcion de buscar nuevos registros
+// Funcion de buscar nuevos registros
 // Función para mostrar registros de una categoría
 function mostrarRegistros(categoria) {
     const registrosContainer = document.getElementById('contenedor-registros');

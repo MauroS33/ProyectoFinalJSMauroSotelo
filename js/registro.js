@@ -7,12 +7,12 @@ const forms = {
     },
     colaborador: {
         nombre: document.getElementById('nombre-colaborador'),
-        vacante: document.getElementById('vacante-colaborador'),
+        categoria: document.getElementById('vacante-colaborador'),
         email: document.getElementById('email-colaborador')
     },
     sponsor: {
-        marca: document.getElementById('marca-sponsor'),
-        zona: document.getElementById('zona-sponsor'),
+        nombre: document.getElementById('marca-sponsor'),
+        categoria: document.getElementById('zona-sponsor'),
         email: document.getElementById('email-sponsor')
     }
 };

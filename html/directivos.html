@@ -49,13 +49,15 @@
     <!-- Formulario de Solicitud de Indumentaria -->
     <div id="form-solicitud-indumentaria" class="hidden">
         <h3>Solicitud de Indumentaria</h3>
-        <select id="categoria">
+        
+        <!-- Opcion a agregar mas adelante cuando se arregle el nuevo contrato con Adidas
+        <select id="Division">  
             <option value="Selecciona">Selecciona una categoría</option>
-            <option value="Futbol 5 Masculino">Futbol 5 M</option>
-            <option value="Futbol 5 Femenino">Futbol 5 F</option>
-            <option value="Futbol 11 Masculino">Futbol 11 M</option>
+            <option value="Futbol Masculino">Futbol Masculino</option>
+            <option value="Futbol Femenino">Futbol Femenino</option>
             <option value="Basketball Masculino">Basketball</option>
-        </select>
+        </select> -->
+
         <select id="Talle">
             <option value="Selecciona">Selecciona un Talle</option>
             <option value="S">Talle S</option>
@@ -63,12 +65,17 @@
             <option value="L">Talle L</option>
             <option value="XL">Talle XL</option>
         </select>
+        
         <div>
             <input type="checkbox" id="prenda-remera-juego"> Remera de Juego<br>
             <input type="checkbox" id="prenda-remera-entrenamiento"> Remera de Entrenamiento<br>
             <input type="checkbox" id="prenda-short"> Short<br>
             <input type="checkbox" id="prenda-conjunto"> Conjunto Deportivo<br>
         </div>
+<!-- Para la proxima temporada
+        <div>
+            <input type="number" id="cantidad-prendas" min="1"> Cantidad<br>
+        </div>-->
         <button id="btn-agregar-carrito">Agregar al Carrito</button>
         <button id="btn-ver-carrito">Ver Carrito</button>
     </div>

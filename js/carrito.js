@@ -21,7 +21,6 @@ const actualizarEstadoBoton = () => {
     }
 };
 
-
 // Llamar a la función para actualizar el estado al cargar la página
 actualizarEstadoBoton();
 
@@ -47,7 +46,6 @@ vaciarCarritoButton.addEventListener('click', () => {
     localStorage.removeItem('carrito'); // Limpiar el carrito del Local Storage
     carrito.length = 0; // Vaciar el array del carrito
     actualizarEstadoBoton(); // Actualizar el estado del botón
-    // Aquí puedes agregar código para actualizar la visualización del carrito en la página
 });
 
 // Mostrar los elementos del carrito
@@ -65,7 +63,6 @@ if (carrito.length === 0) {
 
         pedidoElement.innerHTML = `
             <h3>Pedido ${index + 1}</h3>
-            <p><strong>Categoría:</strong> ${pedido.categoria}</p>
             <p><strong>Talle:</strong> ${pedido.talle}</p>
             <p><strong>Prendas:</strong></p>
             <ul>
@@ -108,12 +105,6 @@ function editarPedido(index) {
     Swal.fire({
         title: 'Editar Pedido',
         html: `
-            <select id="categoria" class="swal2-select">
-                <option value="Jugador" ${pedido.categoria === 'Jugador' ? 'selected' : ''}>Jugador</option>
-                <option value="Colaborador" ${pedido.categoria === 'Colaborador' ? 'selected' : ''}>Colaborador</option>
-                <option value="Socio" ${pedido.categoria === 'Socio' ? 'selected' : ''}>Socio</option>
-                <option value="Sponsor" ${pedido.categoria === 'Sponsor' ? 'selected' : ''}>Sponsor</option>
-            </select>
             <select id="talle" class="swal2-select">
                 <option value="S" ${pedido.talle === 'S' ? 'selected' : ''}>S</option>
                 <option value="M" ${pedido.talle === 'M' ? 'selected' : ''}>M</option>
@@ -129,7 +120,6 @@ function editarPedido(index) {
         `,
         confirmButtonText: 'Guardar',
         preConfirm: () => {
-            const categoria = Swal.getPopup().querySelector('#categoria').value;
             const talle = Swal.getPopup().querySelector('#talle').value;
             const checkboxes = Swal.getPopup().querySelectorAll('.swal2-checkbox');
 
@@ -142,7 +132,7 @@ function editarPedido(index) {
 
             const precioTotal = prendasSeleccionadas.reduce((total, item) => total + item.precio, 0);
 
-            carrito[index] = { categoria, talle, prendas: prendasSeleccionadas, precio: precioTotal };
+            carrito[index] = { talle, prendas: prendasSeleccionadas, precio: precioTotal };
             localStorage.setItem('carrito', JSON.stringify(carrito));
             location.reload();
         }
