@@ -31,7 +31,7 @@ document.getElementById('btn-login').addEventListener('click', function() {
     if (username === 'Mauro' && password === '1234') {
         // Guardar el nombre del usuario en el Local Storage
         localStorage.setItem('usuario', username); 
-        window.location.href = '/html/directivos.html'; // Redirigir a directivos.html si las credenciales son correctas
+        window.location.href = 'html/directivos.html'; // Redirigir a directivos.html si las credenciales son correctas
     } else {
         Swal.fire({
             title: "Error",
