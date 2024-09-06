@@ -1,16 +1,16 @@
 // Función para actualizar el estado del botón de Confirmar y de Vaciar Pedido
 const actualizarEstadoBoton = () => {
     if (carrito.length === 0) {
-        confirmarPedidoButton.disabled = true; // Deshabilita el botón si el carrito está vacío
-        vaciarCarritoButton.disabled = true; // Deshabilita el botón si el carrito está vacío
-        confirmarPedidoButton.classList.add('boton-deshabilitado'); // Añadir clase para estilo deshabilitado
-        vaciarCarritoButton.classList.add('boton-deshabilitado'); // Añadir clase para estilo deshabilitado
+        confirmarPedidoButton.disabled = true; 
+        vaciarCarritoButton.disabled = true; 
+        confirmarPedidoButton.classList.add('boton-deshabilitado'); 
+        vaciarCarritoButton.classList.add('boton-deshabilitado'); 
 
     } else {
-        confirmarPedidoButton.disabled = false; // Habilita el botón si hay elementos en el carrito
-        vaciarCarritoButton.disabled = false; // Habilita el botón si hay elementos en el carrito
-        confirmarPedidoButton.classList.remove('boton-deshabilitado'); // Quitar clase de estilo deshabilitado
-        vaciarCarritoButton.classList.remove('boton-deshabilitado'); // Añadir clase para estilo deshabilitado
+        confirmarPedidoButton.disabled = false; 
+        vaciarCarritoButton.disabled = false; 
+        confirmarPedidoButton.classList.remove('boton-deshabilitado'); 
+        vaciarCarritoButton.classList.remove('boton-deshabilitado'); 
 
     }
 };
@@ -139,7 +139,7 @@ function agregarAlCarrito() {
         });
         return;
     }
-
+    // Validar que se haya seleccionado al menos una prenda
     if (prendasSeleccionadas.length === 0) {
         Swal.fire({
             title: "Error",
@@ -167,13 +167,13 @@ function agregarAlCarrito() {
 
 // Redireccionar al carrito
 document.getElementById('btn-ver-carrito').addEventListener('click', function() {
-    window.location.href = '/html/carrito.html'; // Redirige al nuevo HTML para mostrar el carrito
+    window.location.href = '/html/carrito.html'; // Redirige al HTML para "carrito"
 });
 
 // nueva funcion de buscar nuevos registros
 // Función para mostrar registros de una categoría
 function mostrarRegistros(categoria) {
-    const registrosContainer = document.getElementById('registros-container');
+    const registrosContainer = document.getElementById('contenedor-registros');
     registrosContainer.innerHTML = ''; // Limpiar el contenedor antes de mostrar nuevos registros
 
     // Obtener datos de Local Storage
@@ -188,23 +188,23 @@ function mostrarRegistros(categoria) {
     const lista = document.createElement('ul');
     registros.forEach(registro => {
         const item = document.createElement('li');
-        item.textContent = JSON.stringify(registro); // Puedes formatear los registros como desees
+        item.textContent = JSON.stringify(registro); 
         lista.appendChild(item);
     });
     registrosContainer.appendChild(lista);
 }
 
 // Botones de eventos para mostrar registros
-document.getElementById('btn-mostrar-jugadores').addEventListener('click', function() {
-    mostrarRegistros('jugador'); // Cambiar a 'jugador' para coincidir con la clave usada en Local Storage
+document.getElementById('mostrar-jugadores').addEventListener('click', function() {
+    mostrarRegistros('jugador'); 
 });
 
-document.getElementById('btn-mostrar-colaboradores').addEventListener('click', function() {
-    mostrarRegistros('colaborador'); // Cambiar a 'colaborador'
+document.getElementById('mostrar-colaboradores').addEventListener('click', function() {
+    mostrarRegistros('colaborador'); 
 });
 
-document.getElementById('btn-mostrar-sponsors').addEventListener('click', function() {
-    mostrarRegistros('sponsor'); // Cambiar a 'sponsor'
+document.getElementById('mostrar-sponsors').addEventListener('click', function() {
+    mostrarRegistros('sponsor'); 
 });
 
 // Funciones para cargar los datos desde Local Storage y mostrarlos
@@ -223,8 +223,7 @@ function cargarYMostrarRegistros(tipo) {
             <p>Nombre: ${registro.nombre}</p>
             <p>Categoría: ${registro.categoria}</p>
             <p>Email: ${registro.email}</p>
-            <!-- Agrega más campos según sea necesario -->
-        `;
+        `;             // Agrego más campos según sea necesario
         contenedor.appendChild(registroElemento);
     });
 }
@@ -235,9 +234,9 @@ document.getElementById("mostrar-jugadores").addEventListener("click", () => {
 });
 
 document.getElementById("mostrar-colaboradores").addEventListener("click", () => {
-    cargarYMostrarRegistros("colaboradores");
+    cargarYMostrarRegistros("colaborador");
 });
 
 document.getElementById("mostrar-sponsors").addEventListener("click", () => {
-    cargarYMostrarRegistros("sponsors");
+    cargarYMostrarRegistros("sponsor");
 });

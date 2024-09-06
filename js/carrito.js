@@ -151,13 +151,26 @@ function editarPedido(index) {
 
 // Función para eliminar un pedido
 function eliminarPedido(index) {
-    carrito.splice(index, 1);
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-    Swal.fire('Eliminado', 'El pedido ha sido eliminado.', 'success').then(() => window.location.reload());
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "No podrás revertir esta acción.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            carrito.splice(index, 1);
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            Swal.fire('Eliminado', 'El pedido ha sido eliminado.', 'success').then(() => window.location.reload());
+        }
+    });
+
 }
 
 // Vaciar el carrito completamente
 vaciarCarritoButton.addEventListener('click', () => {
+    localStorage.removeItem('carrito'); // Elimina el carrito del Local Storage
     Swal.fire({
         title: '¿Estás seguro?',
         text: "No podrás revertir esta acción.",
@@ -167,10 +180,15 @@ vaciarCarritoButton.addEventListener('click', () => {
         cancelButtonText: 'Cancelar'
     }).then((result) => {
         if (result.isConfirmed) {
-            localStorage.removeItem('carrito'); // Elimina el carrito del Local Storage
             Swal.fire('Carrito Vacío', 'Todos los pedidos han sido eliminados.', 'success').then(() => window.location.reload());
-        }
-    });
+        } else {
+            confirmarPedidoButton.disabled = false; // Habilita el botón si hay elementos en el carrito
+            confirmarPedidoButton.classList.remove('boton-deshabilitado'); // Quitar clase de estilo deshabilitado
+            vaciarCarritoButton.disabled = false; // Habilita el botón si hay elementos en el carrito
+            vaciarCarritoButton.classList.remove('boton-deshabilitado'); // Quitar clase de estilo deshabilitado
+
+        };
+    })
 });
 
 // Botón de Volver

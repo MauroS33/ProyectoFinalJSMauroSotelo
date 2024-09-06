@@ -17,7 +17,6 @@ const forms = {
     }
 };
 
-
 // Manejo de la autenticación
 document.getElementById('btn-ingresar').addEventListener('click', function() {
     document.getElementById('login-form').classList.remove('hidden'); // Mostrar el formulario de login
@@ -31,7 +30,7 @@ document.getElementById('btn-login').addEventListener('click', function() {
 
     if (username === 'Mauro' && password === '1234') {
         // Guardar el nombre del usuario en el Local Storage
-        localStorage.setItem('usuario', username); // Cambiar de 'usuario' a 'nombreDirectivo'
+        localStorage.setItem('usuario', username); 
         window.location.href = '/html/directivos.html'; // Redirigir a directivos.html si las credenciales son correctas
     } else {
         Swal.fire({
@@ -131,13 +130,7 @@ function guardarEnLocalStorage(tipo) {
 
     if (registrosJSON) {
         registros = JSON.parse(registrosJSON);
-        console.log('Registros cargados:', registros);  // Verificar qué hay en registros
-    }
-
-    // Verificar el tipo de datos
-    if (!Array.isArray(registros)) {
-        console.error('Error: registros no es un array.');
-        registros = [];
+        console.log('Registros cargados:', registros);  // Verificar qué haya registros
     }
 
     registros.push(registro);
@@ -153,30 +146,4 @@ function guardarEnLocalStorage(tipo) {
     for (let campo in form) {
         form[campo].value = '';
     }
-}
-function guardarEnLocalStorage(tipo) {
-    let form = forms[tipo];
-    let registro = {};
-
-    for (let campo in form) {
-        registro[campo] = form[campo].value;
-    }
-
-    // Obtener los registros existentes del Local Storage
-    let registros = JSON.parse(localStorage.getItem(tipo)) || [];
-
-    // Agregar el nuevo registro al array
-    registros.push(registro);
-
-    // Guardar el array actualizado en el Local Storage
-    localStorage.setItem(tipo, JSON.stringify(registros));
-
-    Swal.fire({
-        title: "Éxito",
-        text: "Registro guardado correctamente.",
-        icon: "success"
-    });
-
-    // Limpiar el formulario después de guardar
-    limpiarFormulario(tipo);
 }
