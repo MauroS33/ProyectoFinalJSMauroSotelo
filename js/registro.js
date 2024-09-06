@@ -29,8 +29,8 @@ document.getElementById('btn-login').addEventListener('click', function() {
     const password = document.getElementById('password').value;
 
     if (username === 'Mauro' && password === '1234') {
-        // Guardar el nombre del usuario en el Local Storage
-        localStorage.setItem('usuario', username); 
+        // Guardar el nombre del usuario en el Local Storage con la clave 'nombreDirectivo'
+        localStorage.setItem('nombreDirectivo', username); 
         window.location.href = 'html/directivos.html'; // Redirigir a directivos.html si las credenciales son correctas
     } else {
         Swal.fire({
