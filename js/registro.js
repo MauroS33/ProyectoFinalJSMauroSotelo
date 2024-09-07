@@ -141,9 +141,23 @@ function guardarEnLocalStorage(tipo) {
     registros.push(registro);
     localStorage.setItem(tipo, JSON.stringify(registros));
 
+    // Mostrar mensaje de éxito específico para cada tipo
+    let mensajeExito;
+    switch (tipo) {
+        case 'jugador':
+            mensajeExito = `${registro.nombre} ha sido registrado/a como jugador/a correctamente. Nos pondremos en contacto previo al proximo amistoso de la categoria.`;
+            break;
+        case 'colaborador':
+            mensajeExito = `${registro.nombre} ha sido registrado/a como colaborador/a correctamente. ¡Gracias por tu apoyo! Nos pondremos en contacto a la brevedad.`;
+            break;
+        case 'sponsor':
+            mensajeExito = `${registro.nombre} ha sido registrada como marca sponsor correctamente. ¡Gracias por ofrecernos tu patrocinio! Nos pondremos en contacto luego de la proxima junta directiva.`;
+            break;
+    }
+
     Swal.fire({
         title: "Éxito",
-        text: `${registro.nombre || registro.marca} ha sido registrado/a correctamente. Nos pondremos en contacto a la brevedad.`,
+        text: mensajeExito,
         icon: "success"
     });
 
