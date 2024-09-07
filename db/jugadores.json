@@ -282,18 +282,18 @@
         "dorsal": 3,
         "nombre": "María",
         "apellido": "García",
-        "vinculo": "Colaborador",
-        "categoria": "Futbol 11",
-        "division": "Masculino",
+        "vinculo": "Jugador",
+        "categoria": "Futbol 5",
+        "division": "Femenino",
         "partidos_jugados": "10/10"
     },
     {
         "dorsal": 25,
         "nombre": "Evelyn",
         "apellido": "Reyes",
-        "vinculo": "Colaborador",
-        "categoria": "Basket",
-        "division": "Masculino",
+        "vinculo": "Jugador",
+        "categoria": "Futbol 5",
+        "division": "Femenino",
         "partidos_jugados": "9/10"
     },
     {
@@ -307,11 +307,11 @@
     },
     {
         "dorsal": 27,
-        "nombre": "Valentin",
+        "nombre": "Valentina",
         "apellido": "Lopez",
-        "vinculo": "Colaborador",
+        "vinculo": "Jugador",
         "categoria": "Futbol 5",
-        "division": "Masculino",
+        "division": "Femenino",
         "partidos_jugados": "7/15"
     },
     {
@@ -322,6 +322,15 @@
         "categoria": "Futbol 5",
         "division": "Femenino",
         "partidos_jugados": "10/12"
-    }
+    },
 
+    {
+    "dorsal": 20,
+    "nombre": "Gisel",
+    "apellido": "Flechero",
+    "vinculo": "Jugador",
+    "categoria": "Futbol 5",
+    "division": "Femenino",
+    "partidos_jugados": "10/12"
+}
 ]

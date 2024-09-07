@@ -40,23 +40,24 @@ async function buscarJugador() {
     // Obtener los valores de los inputs
     const nombre = document.getElementById('input-nombre').value.trim().toLowerCase();
     const apellido = document.getElementById('input-apellido').value.trim().toLowerCase();
-    const categoria = document.getElementById('input-categoria').value.trim().toLowerCase();
-    const division = document.getElementById('input-division').value.trim().toLowerCase();
+    const categoria = document.getElementById('select-categoria').value.trim().toLowerCase();
+    const division = document.getElementById('select-division').value.trim().toLowerCase();
     const dorsal = document.getElementById('input-dorsal').value.trim().toLowerCase();
-    const vinculo = document.getElementById('input-vinculo').value.trim().toLowerCase();
+    const vinculo = document.getElementById('select-vinculo').value.trim().toLowerCase();
 
     // Filtrar los jugadores en base a los criterios ingresados
     const resultados = jugadores.filter(jugador =>
         (!nombre || jugador.nombre.toLowerCase().includes(nombre)) &&
         (!apellido || jugador.apellido.toLowerCase().includes(apellido)) &&
-        (!categoria || jugador.categoria.toLowerCase().includes(categoria)) &&
-        (!division || jugador.division.toLowerCase().includes(division)) &&
+        (!categoria || jugador.categoria.toLowerCase() === categoria) &&
+        (!division || jugador.division.toLowerCase() === division) &&
         (!dorsal || jugador.dorsal.toString().toLowerCase().includes(dorsal)) &&
-        (!vinculo || jugador.vinculo.toLowerCase().includes(vinculo))
+        (!vinculo || jugador.vinculo.toLowerCase() === vinculo)
     );
 
     mostrarResultados(resultados);
 }
+
 
 // Mostrar resultados de búsqueda en el DOM
 function mostrarResultados(resultados) {

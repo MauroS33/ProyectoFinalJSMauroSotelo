@@ -32,13 +32,33 @@
         <div id="buscador">
             <input type="text" id="input-nombre" placeholder="Buscar por nombre">
             <input type="text" id="input-apellido" placeholder="Buscar por apellido">
-            <input type="text" id="input-categoria" placeholder="Buscar por categoría">
-            <input type="text" id="input-division" placeholder="Buscar por división">
+
+            <!-- Menús desplegables -->
+            <select id="select-categoria">
+                <option value="">Selecciona una categoría</option>
+                <option value="Futbol 5">Fútbol 5</option>
+                <option value="Futbol 11">Fútbol 11</option>
+                <option value="Basket">Basket</option>
+                <!-- Agregaremos mas opciones cuando salga el voley y hockey -->
+            </select>
+
+            <select id="select-division">
+                <option value="">Selecciona una división</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+                <!-- Agregaremos más opciones si se crean las juveniles para 2025 -->
+            </select>
+
+            <select id="select-vinculo">
+                <option value="">Selecciona un vínculo</option>
+                <option value="Jugador">Jugador</option>
+                <option value="Colaborador">Colaborador</option>
+                <!-- Agregaremos más opciones a medida que se acepten los nuevos ingresos -->
+            </select>
+
             <input type="text" id="input-dorsal" placeholder="Buscar por dorsal">
-            <input type="text" id="input-vinculo" placeholder="Buscar por vínculo">
             <button id="btn-buscar">Buscar</button>
         </div>
-
         <!-- Card genérica -->
         <div id="resultados-busqueda"></div>
     </div>
