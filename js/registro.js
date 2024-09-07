@@ -17,11 +17,46 @@ const forms = {
     }
 };
 
+// Función para validar emails
+function esEmailValido(email) {
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regexEmail.test(email);
+}
+
+// Función de validación
+function validarFormulario(tipo) {
+    let form = forms[tipo];
+
+    // Validar que todos los campos estén llenos
+    for (let campo in form) {
+        if (!form[campo].value) {
+            Swal.fire({
+                title: "Error",
+                text: `Por favor, complete el campo ${campo.replace(/-/g, ' ')}.`,
+                icon: "error"
+            });
+            return false;
+        }
+    }
+
+    // Validar el campo de email
+    if (!esEmailValido(form.email.value)) {
+        Swal.fire({
+            title: "Error",
+            text: "Por favor, ingrese un correo electrónico válido.",
+            icon: "error"
+        });
+        return false;
+    }
+
+    return true;
+}
+
 // Manejo de la autenticación
 document.getElementById('btn-ingresar').addEventListener('click', function() {
-    document.getElementById('login-form').classList.remove('hidden'); // Mostrar el formulario de login
-    document.getElementById('registro-opciones').classList.add('hidden'); // Ocultar opciones de nuevo registro
-    document.querySelectorAll('.formulario').forEach(form => form.classList.add('hidden')); // Ocultar formulario de nuevo registro
+    document.getElementById('login-form').classList.remove('hidden');
+    document.getElementById('registro-opciones').classList.add('hidden');
+    document.querySelectorAll('.formulario').forEach(form => form.classList.add('hidden'));
 });
 
 document.getElementById('btn-login').addEventListener('click', function() {
@@ -29,9 +64,8 @@ document.getElementById('btn-login').addEventListener('click', function() {
     const password = document.getElementById('password').value;
 
     if (username === 'Mauro' && password === '1234') {
-        // Guardar el nombre del usuario en el Local Storage con la clave 'nombreDirectivo'
         localStorage.setItem('nombreDirectivo', username); 
-        window.location.href = 'html/directivos.html'; // Redirigir a directivos.html si las credenciales son correctas
+        window.location.href = 'html/directivos.html';
     } else {
         Swal.fire({
             title: "Error",
@@ -44,21 +78,20 @@ document.getElementById('btn-login').addEventListener('click', function() {
 // Mostrar los formularios al hacer clic en los botones correspondientes
 document.getElementById('btn-jugador').addEventListener('click', function() {
     mostrarFormulario('jugador');
-    document.getElementById('login-form').classList.add('hidden'); // Ocultar ingreso de directivos
+    document.getElementById('login-form').classList.add('hidden');
 });
 
 document.getElementById('btn-colaborador').addEventListener('click', function() {
     mostrarFormulario('colaborador');
-    document.getElementById('login-form').classList.add('hidden');  // Ocultar ingreso de directivos
+    document.getElementById('login-form').classList.add('hidden');
 });
 
 document.getElementById('btn-sponsor').addEventListener('click', function() {
     mostrarFormulario('sponsor');
-    document.getElementById('login-form').classList.add('hidden');    // Ocultar ingreso de directivos
+    document.getElementById('login-form').classList.add('hidden');
 });
 
 function mostrarFormulario(tipo) {
-    // Ocultar todos los formularios y mostrar solo el seleccionado
     document.querySelectorAll('.formulario').forEach(form => form.classList.add('hidden'));
     document.getElementById(`formulario-${tipo}`).classList.remove('hidden');
 }
@@ -66,72 +99,32 @@ function mostrarFormulario(tipo) {
 // Mostrar opciones de registro
 document.getElementById('btn-nuevo-registro').addEventListener('click', function() {
     document.getElementById('registro-opciones').classList.remove('hidden');
-    document.getElementById('login-form').classList.add('hidden'); // Ocultar el formulario de login
+    document.getElementById('login-form').classList.add('hidden');
 });
 
 // Eventos de guardar con validación
 document.getElementById('btn-guardar-jugador').addEventListener('click', function() {
     if (validarFormulario('jugador')) {
         guardarEnLocalStorage('jugador');
-    } else {
-        function mostrarError(tipo) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: `Por favor completa correctamente los campos de ${tipo}.`,
-                showConfirmButton: true
-            });
-        }    }
+    }
 });
 
 document.getElementById('btn-guardar-colaborador').addEventListener('click', function() {
     if (validarFormulario('colaborador')) {
         guardarEnLocalStorage('colaborador');
-    } else {
-        function mostrarError(tipo) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: `Por favor completa correctamente los campos de ${tipo}.`,
-                showConfirmButton: true
-            });
-        }    }
+    }
 });
 
 document.getElementById('btn-guardar-sponsor').addEventListener('click', function() {
     if (validarFormulario('sponsor')) {
         guardarEnLocalStorage('sponsor');
-    } else {
-        function mostrarError(tipo) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: `Por favor completa correctamente los campos de ${tipo}.`,
-                showConfirmButton: true
-            });
-        }    }
-});
-
-// Función de validación
-function validarFormulario(tipo) {
-    let form = forms[tipo];
-    for (let campo in form) {
-        if (!form[campo].value) {
-            Swal.fire({
-                title: "Error",
-                text: `Por favor, complete el campo ${campo.replace(/-/g, ' ')}.`,
-                icon: "error"
-            });
-            return false;
-        }
     }
-    return true;
-}
+});
 
 // Manejador del botón "Salir"
 document.getElementById('btn-salir').addEventListener('click', function() {
     document.getElementById('registro-opciones').classList.add('hidden');
-    document.querySelectorAll('.formulario').forEach(form => form.classList.add('hidden')); // Ocultar todos los formularios
+    document.querySelectorAll('.formulario').forEach(form => form.classList.add('hidden'));
 });
 
 function guardarEnLocalStorage(tipo) {
@@ -142,13 +135,8 @@ function guardarEnLocalStorage(tipo) {
         registro[campo] = form[campo].value;
     }
 
-    // Obtener registros del Local Storage
     let registrosJSON = localStorage.getItem(tipo);
-    let registros = [];
-
-    if (registrosJSON) {
-        registros = JSON.parse(registrosJSON);
-     }
+    let registros = registrosJSON ? JSON.parse(registrosJSON) : [];
 
     registros.push(registro);
     localStorage.setItem(tipo, JSON.stringify(registros));
